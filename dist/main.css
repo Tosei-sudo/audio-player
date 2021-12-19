@@ -268,6 +268,10 @@
   padding: 5px 10px;
   color: black;
 }
+.ap-ts-wrapper .ap-ts-hid-title[data-v-1e867636] {
+  color: #8f8f8f;
+  font-size: 0.7em;
+}
 .ap-ts-wrapper .ap-ts-list[data-v-1e867636] {
   margin-top: 0;
   font-size: initial;
@@ -298,6 +302,66 @@
 .ap-ts-wrapper .ap-ts-list li.ap-ts-now[data-v-1e867636] {
   border-left: blue solid 3px;
   background-color: #bad3ff;
+}
+.js-accordion--trigger[data-v-1e867636] {
+  position: relative;
+  transition: all 0.2s ease-in;
+}
+.js-accordion--trigger[data-v-1e867636]:after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border: solid transparent;
+  content: "";
+  border-top-color: #5f6569;
+  border-width: 7px;
+  position: absolute;
+  top: 50%;
+  right: 1em;
+  margin-top: -5px;
+  transition: all 0.2s ease-in;
+}
+.js-accordion--trigger._state-open[data-v-1e867636] {
+  background-color: #f1f1f1;
+  text-decoration: none;
+}
+.js-accordion--trigger._state-open[data-v-1e867636]:after {
+  transform: rotateX(180deg);
+  margin-top: -10px;
+}
+.js-accordion--trigger[data-v-1e867636]:hover {
+  background-color: #f1f1f1;
+  text-decoration: none;
+}
+.js-accordion--target[data-v-1e867636] {
+  overflow: hidden;
+  transition: 0.4s ease-in-out;
+}
+.js-accordion-enter-active[data-v-1e867636] {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: js-accordion--anime__opend-data-v-1e867636;
+}
+.js-accordion-leave-active[data-v-1e867636] {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: js-accordion--anime__closed-data-v-1e867636;
+}
+@keyframes js-accordion--anime__opend-data-v-1e867636 {
+0% {
+    opacity: 0;
+}
+100% {
+    opacity: 1;
+}
+}
+@keyframes js-accordion--anime__closed-data-v-1e867636 {
+0% {
+    opacity: 1;
+}
+100% {
+    opacity: 0;
+}
 }
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-1[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-1[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/app.vue?vue&type=style&index=0&lang=scss& ***!

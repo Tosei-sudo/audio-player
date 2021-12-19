@@ -1,17 +1,29 @@
 <template>
-    <div v-if="isShow" class="ap-ts-wrapper">
-        <h2 class="ap-ts-chapter">チャプター</h2>
-        <ul class="ap-ts-list">
-            <li
-                v-for="(link, i) in list"
-                :key="link[0]"
-                @click="click(link[0])"
-                v-bind:class="isNow(i)"
-            >
-                <span class="ap-ts-title">{{ link[1] }}</span>
-                <span class="ap-ts-time">{{ convTime(link[0]) }}</span>
-            </li>
-        </ul>
+    <div v-if="isShow" class="ap-ts-wrapper js-accordion">
+        <h2
+            class="ap-ts-chapter js-accordion--trigger"
+            @click="isOpened = !isOpened"
+        >
+            チャプター
+            <span class="ap-ts-hid-title" v-if="!isOpened">{{ nowTitle }}</span>
+        </h2>
+        <div
+            class="js-accordion--target"
+            :class="{ '_state-open': isOpened }"
+            v-if="isOpened"
+        >
+            <ul class="js-accordion--body ap-ts-list">
+                <li
+                    v-for="(link, i) in list"
+                    :key="link[0]"
+                    @click="click(link[0])"
+                    v-bind:class="isNow(i)"
+                >
+                    <span class="ap-ts-title">{{ link[1] }}</span>
+                    <span class="ap-ts-time">{{ convTime(link[0]) }}</span>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -26,6 +38,9 @@ export default {
     data() {
         return {
             now: 0,
+            isOpened: false,
+            nowTitle: "",
+            nowIndex: NaN,
         };
     },
     methods: {
@@ -44,18 +59,23 @@ export default {
             );
         },
         changeTime(second) {
-            this.now = Math.floor(second);
+            second = Math.floor(second);
+            for (let i = 0; i < this.list.length; i++) {
+                let s = true;
+                if (this.list[i + 1]) {
+                    s = second < this.list[i + 1][0];
+                }
+                if (second >= this.list[i][0] && s) {
+                    this.nowTitle = this.list[i][1];
+                    this.nowIndex = i;
+                    break;
+                }
+            }
         },
         isNow(i) {
-            let s = true;
-            if (this.list[i + 1]) {
-                s = this.now < this.list[i + 1][0];
-            }
-            if (this.now >= this.list[i][0] && s) {
-                return "ap-ts-now";
-            }else{
-                return "";
-            }
+            return {
+                "ap-ts-now": i === this.nowIndex,
+            };
         },
     },
     computed: {
@@ -76,6 +96,10 @@ export default {
         font-size: 1.5em;
         padding: 5px 10px;
         color: black;
+    }
+    .ap-ts-hid-title {
+        color: #8f8f8f;
+        font-size: 0.7em;
     }
     .ap-ts-list {
         margin-top: 0;
@@ -107,6 +131,70 @@ export default {
                 background-color: #bad3ff;
             }
         }
+    }
+}
+.js-accordion {
+    &--trigger {
+        position: relative;
+        transition: all 0.2s ease-in;
+        &:after {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border: solid transparent;
+            content: "";
+            border-top-color: #5f6569;
+            border-width: 7px;
+            position: absolute;
+            top: 50%;
+            right: 1em;
+            margin-top: -5px;
+            transition: all 0.2s ease-in;
+        }
+        &._state-open {
+            background-color: #f1f1f1;
+            text-decoration: none;
+            &:after {
+                transform: rotateX(180deg);
+                margin-top: -10px;
+            }
+        }
+        &:hover {
+            background-color: #f1f1f1;
+            text-decoration: none;
+        }
+    }
+    &--target {
+        overflow: hidden;
+        transition: 0.4s ease-in-out;
+    }
+    &-enter-active {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: js-accordion--anime__opend;
+    }
+    &-leave-active {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: js-accordion--anime__closed;
+    }
+}
+
+@keyframes js-accordion--anime__opend {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes js-accordion--anime__closed {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
     }
 }
 </style>
