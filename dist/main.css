@@ -255,6 +255,50 @@
 .mp-tb-wrapper {
   padding: 3px 10px;
 }
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-1[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-1[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/timestamp.vue?vue&type=style&index=0&id=1e867636&lang=scss&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.ap-ts-wrapper[data-v-1e867636] {
+  background-color: #f0f0f0;
+  margin: 5px;
+  border: 1px solid #8f8f8f;
+}
+.ap-ts-wrapper .ap-ts-chapter[data-v-1e867636] {
+  font-size: 1.5em;
+  padding: 5px 10px;
+  color: black;
+}
+.ap-ts-wrapper .ap-ts-list[data-v-1e867636] {
+  margin-top: 0;
+  font-size: initial;
+  list-style: none;
+}
+.ap-ts-wrapper .ap-ts-list li[data-v-1e867636] {
+  width: 100%;
+  padding: 5px;
+  cursor: pointer;
+  font-size: initial;
+}
+@media screen and (min-width: 767px) {
+.ap-ts-wrapper .ap-ts-list li[data-v-1e867636]:hover {
+    background-color: #bfbfbf;
+}
+}
+.ap-ts-wrapper .ap-ts-list li .ap-ts-title[data-v-1e867636] {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: black;
+  width: 75%;
+}
+.ap-ts-wrapper .ap-ts-list li .ap-ts-time[data-v-1e867636] {
+  font-size: 1em;
+  color: #373737;
+  width: 25%;
+}
+.ap-ts-wrapper .ap-ts-list li.ap-ts-now[data-v-1e867636] {
+  border-left: blue solid 3px;
+  background-color: #bad3ff;
+}
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-1[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-1[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/app.vue?vue&type=style&index=0&lang=scss& ***!
   \************************************************************************************************************************************************************************************************************************************************************************************************************************************/

@@ -12,6 +12,7 @@
             class="mp-tb-slider"
             height="8px"
             ref="slider"
+            max="500"
         ></vue-slider>
         <clock :val="val" :max="max" :rate="rate" ref="clock"></clock>
     </div>
@@ -45,6 +46,9 @@ export default {
         };
     },
     methods: {
+        refs_change(second){
+            this.change(second * this.rate);
+        },
         change(val) {
             if (this.drag) {
                 val = (1 / this.rate) * val;
@@ -69,7 +73,7 @@ export default {
     },
     computed: {
         rate() {
-            return 100 / this.max;
+            return 500 / this.max;
         },
         markcomp() {
             let d = {};

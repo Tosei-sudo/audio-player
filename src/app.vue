@@ -22,6 +22,9 @@
                 @change="change"
             ></audiotimebar>
         </div>
+        <div>
+            <timestamp :list="stamps" @click="markclick" ref="timestamp"></timestamp>
+        </div>
     </div>
 </template>
 
@@ -29,18 +32,20 @@
 import audioList from "./components/music-list.vue";
 import audiocontroller from "./components/music-controller.vue";
 import audiotimebar from "./components/music-timebar.vue";
+import timestamp from "./components/timestamp.vue";
 import { VueLoading } from 'vue-loading-template'
 
 export default {
-    components: { audioList, audiocontroller, audiotimebar,VueLoading },
+    components: { audioList, audiocontroller, audiotimebar,VueLoading ,timestamp},
     props: {
         list: {
             type: Array,
             required: true,
         },
-        timestamp: {
+        stamps: {
             type: Array,
             required: false,
+            default: [],
         },
         loading:{
             type: Boolean,
@@ -57,6 +62,12 @@ export default {
         };
     },
     methods: {
+        markclick(second) {
+            if(this.audio){
+            this.audio.currentTime = Math.floor(second);
+
+            }
+        },
         c_play() {
             let p = this.currentpath;
             let t = this.currentTitle;
@@ -84,6 +95,7 @@ export default {
                     this.max = this.audio.duration;
                 };
                 this.audio.ontimeupdate = () => {
+                    this.$refs.timestamp.changeTime(this.audio.currentTime);
                     this.$refs.audiotimebars.timechange(this.audio.currentTime);
                 };
                 this.audio.onended = () => {
@@ -129,8 +141,8 @@ export default {
     computed: {
         marks() {
             let marks = [];
-            if (this.timestamp) {
-                for(let time of this.timestamp){
+            if (this.stamps) {
+                for(let time of this.stamps){
                     marks.push(time[0]);
                 }
             }else{
